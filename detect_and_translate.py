@@ -7,20 +7,18 @@ from bs4 import BeautifulSoup
 
 # Checks the language and translates when necessary
 def detect_translate(text):
-    translator = Translator()
-    # Detect the language
-    if text:
-        detected_language = detect(text)
-        # If the language is not EN, translates it
-        if detected_language != 'en':
-            translated_text = translator.translate(text, dest='en')
-            translated_output = f"The original text was on {detected_language.upper()} language.\nThe translated text is:\n{translated_text.text}"
-            return translated_output
-        # Return the original text if it's in EN
-        else:
-            return text
-    else:
+    if not text:
         return None
+    translator = Translator()
+    detected_language = detect(text)
+    # If the language is not EN, translates it
+    if detected_language != 'en':
+        translated_text = translator.translate(text, dest='en')
+        translated_output = f"The original text was on {detected_language.upper()} language.\nThe translated text is:\n{translated_text.text}"
+        return translated_output
+    # Return the original text if it's in EN
+    else:
+        return text
 
 
 # Parses the HTML content
@@ -43,14 +41,18 @@ def parse_email_and_process_translation(file_path):
 
     # Imports the subject and check if it is needed to translate it
     email_subject = email_info.subject
-    translated_email_subject = detect_translate(email_subject)
+    if email_subject:
+        translated_email_subject = detect_translate(email_subject)
+    else:
+        translated_email_subject = None
 
-    # Imports the body and check if it is needed to translate it
+    # Parse the email body and handle translation
     email_body_text = email_info.body
-    email_body_text = email_info.body
-    if email_body_text and email_subject:
+    if email_body_text:
         clean_text = to_text(email_body_text)
         translated_text = detect_translate(clean_text)
-        return translated_email_subject, translated_text
     else:
-        return None
+        translated_text = None
+
+    # Return translated subject and body (if available)
+    return translated_email_subject, translated_text

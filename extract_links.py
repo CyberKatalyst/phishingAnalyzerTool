@@ -1,6 +1,7 @@
 # Import required libraries and custom modules
 from bs4 import BeautifulSoup
 
+
 def get_urls(email_body):
     urls = []
     # Check if the email in HTML format

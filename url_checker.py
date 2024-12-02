@@ -34,7 +34,7 @@ def url_check(urls):
     path = check_url_location()
     df = pd.read_csv(path)
     results = {}
-    with vt.Client("XXX") as client:
+    with vt.Client("xxx") as client:
         for url_to_check in urls:
             url_id = base64.urlsafe_b64encode(url_to_check.encode()).decode().strip("=")
             try:

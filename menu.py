@@ -2,9 +2,9 @@
 import extract_email_info
 
 
-def analyze_email(eml):
+def analyze_email():
     print("Your email is being analyzed...")
-    extract_email_info.get_info(f"C:\\Users\\97258\\Downloads\\{eml}")
+    extract_email_info.get_info("C:\\Users\\97258\\Downloads\\scam.eml")
     exit()
 
 
@@ -22,7 +22,6 @@ def menu_tab():
         try:
             option = int(input("Enter your choice: "))
             if option == 1:
-                input("Enter the .eml file you want to analysis:")
                 analyze_email()
             elif option == 2:
                 report_request()

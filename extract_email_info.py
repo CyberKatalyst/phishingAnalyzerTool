@@ -9,6 +9,7 @@ import extract_attachments
 import prediction
 import url_checker
 
+
 def check_record_location():
     file_path = 'C:\\Phishing Analysis\\analyzed_emails.csv'
     # If the file exists, then load it as DF
@@ -75,11 +76,13 @@ def get_info(email):
         try:
             # Convert the new email record to a DF
             new_record_df = pd.DataFrame([new_row])
+            print(new_record_df)
             if df.empty:
                 df = new_record_df
             else:
                 df = pd.concat([df, new_record_df], ignore_index=True)
             # Save the updated DF back to the .csv file
+            print(new_record_df)
             df.to_csv(path, index=False)
         except Exception as e:
             print(f"Error during the saving record: {e}")
