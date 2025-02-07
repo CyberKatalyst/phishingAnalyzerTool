@@ -6,7 +6,7 @@ import menu
 def main():
     Title = pyfiglet.figlet_format("Email Analyzer")
     print(Title)
-    menu.menu_tab()
+    menu.general_menu_tab()
 
 
 if __name__ == "__main__":
