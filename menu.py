@@ -6,7 +6,8 @@ import suspicion_check
 
 def analyze_email():
     try:
-        date, sender, subject, body, urls, attachments = email_functions.extract_info("C:\\Users\\97258\\Downloads\\suspicious.eml")
+        email_path = input("Provide email path: ")
+        date, sender, subject, body, urls, attachments = email_functions.extract_info(email_path)
         domain = email_functions.extract_domain(sender)
 
         # Prepare data in a list of lists or tuples
